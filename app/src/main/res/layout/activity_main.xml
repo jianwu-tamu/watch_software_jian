@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zzw.watchpkgwithoutglass.MainActivity"
+    tools:deviceIds="wear">
+
+    <Button
+        android:id="@+id/switch_connect_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="connect"/>
+    <LinearLayout
+        android:id="@+id/ip_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switch_connect_btn"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:id="@+id/check_ip_btn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="check ip"/>
+
+        <Button
+            android:id="@+id/input_ip_btn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="change ip"
+            android:layout_alignBaseline="@+id/check_ip_btn"
+            android:layout_alignBottom="@+id/check_ip_btn"
+            android:layout_centerVertical="true" />
+        </LinearLayout>
+</RelativeLayout>

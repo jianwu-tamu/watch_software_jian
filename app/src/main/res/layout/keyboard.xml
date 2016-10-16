@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:keepScreenOn="true">
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="Enter ip address" />
+
+    <Button
+        android:id="@+id/num1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-2dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:text="1"
+        android:textSize="15dp"/>
+
+    <Button
+        android:id="@+id/num2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/num1"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="2" />
+
+    <Button
+        android:id="@+id/num3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/num2"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="3" />
+
+    <Button
+        android:id="@+id/num4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/num3"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="4" />
+
+    <Button
+        android:id="@+id/num5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/num4"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="5" />
+
+    <Button
+        android:id="@+id/num6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/num5"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="6" />
+
+    <Button
+        android:id="@+id/num7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/num6"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="7" />
+
+    <Button
+        android:id="@+id/num8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/num7"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="8" />
+
+    <Button
+        android:id="@+id/num9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/num8"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="9" />
+
+    <Button
+        android:id="@+id/num0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginLeft="-6dp"
+        android:layout_toRightOf="@id/num9"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="15dp"
+        android:text="0" />
+
+    <Button
+        android:id="@+id/backspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/num2"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:text="bksp"
+        android:textSize="12sp"/>
+
+    <Button
+        android:id="@+id/point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/num4"
+        android:layout_marginLeft="68dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:text="point"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:text="enter"
+        android:layout_marginTop="0dp"
+        android:textSize="12sp"
+        android:layout_alignBaseline="@+id/point"
+        android:layout_alignBottom="@+id/point"
+        android:layout_alignStart="@+id/num8" />
+
+</RelativeLayout>

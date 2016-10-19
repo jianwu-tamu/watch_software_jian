@@ -12,6 +12,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -64,6 +65,7 @@ public class BLEService extends Service implements SensorEventListener{
      */
     private static final int BYTE_NUM_DEV_ID_AND_TYPE = 4 + 1;
     private static final int BYTE_NUM_WATCH_SAMPLE = 2 * 6 ;
+    private static final int BYTE_NUM_BATTERY_LIFE  = 1;
 
     /**
      * indicators of samples number
@@ -80,24 +82,43 @@ public class BLEService extends Service implements SensorEventListener{
      */
     private static final String DEV_ID = Build.SERIAL.substring(6);
     private static final String TYPE_WATCH = "w";
+    private static final String TYPE_BATTERY = "b";
 
+    private int lastBattery = -1;
     private boolean shouldStop = false;
     private PowerManager.WakeLock wakeLock;
 
     public DatagramSocket sock = null;
     public DatagramPacket received;
     public int ECHOMAX = 512; // the max size of data packet to send or receive
-    /**
-     * waiting for the stop broadcast, when received start to disconnect the glasses and stop the service
-     */
+
     private final BroadcastReceiver stopInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
             String action = intent.getAction();
             if(action.equals(MainActivity.STOP_ACTION)){
-                shouldStop = true;
                 stopSelf();
+            }
+        }
+    };
+
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context ctxt, Intent intent) {
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            if (lastBattery == -1) {
+                lastBattery = level;
+                return;
+            } else {
+                if (lastBattery - level >= 3) {
+                    Log.d(TAG, "battery " + String.valueOf(level));
+                    ByteBuffer bb = ByteBuffer.allocate(BYTE_NUM_DEV_ID_AND_TYPE + BYTE_NUM_BATTERY_LIFE);
+                    bb.put(DEV_ID.getBytes());
+                    bb.put(TYPE_BATTERY.getBytes());
+                    bb.put(((byte)(level & 0xff)));
+                    sender.send(bb.array());
+                }
             }
         }
     };
@@ -144,6 +165,7 @@ public class BLEService extends Service implements SensorEventListener{
         IntentFilter filter = new IntentFilter();
         filter.addAction(MainActivity.STOP_ACTION);
         registerReceiver(stopInfoReceiver, filter);
+        registerReceiver(mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); // get SensorManager
         accSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); // get Accelerometer
@@ -162,7 +184,7 @@ public class BLEService extends Service implements SensorEventListener{
 
     @Override
     public void onDestroy() {
-        unregisterReceiver(stopInfoReceiver);
+        unregisterReceiver(mBatInfoReceiver);
         mSensorManager.unregisterListener(this);
         wakeLock.release();
         stopForeground(true);

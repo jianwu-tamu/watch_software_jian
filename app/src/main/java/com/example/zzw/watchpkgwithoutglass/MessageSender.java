@@ -19,11 +19,11 @@ import android.net.wifi.WifiManager;
 public class MessageSender {
 
     private DatagramSocket socket = null;
-    private InetAddress serverAddress = null; // the address of server
+    private static InetAddress serverAddress = null; // the address of server
     private int servPort = 4566;
 
     // the ip address of the server PC or android phone
-    private String Server_IP;
+    private static String Server_IP;
 
     // Since asynchronous/blocking functions should not run on the UI thread.
     private ExecutorService executorService;
@@ -49,6 +49,13 @@ public class MessageSender {
     public static synchronized MessageSender getInstance(String ip) {
         if (instance == null) {
             instance = new MessageSender(ip);
+        } else {
+            Server_IP = ip;
+            try {
+                serverAddress = InetAddress.getByName(Server_IP);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
         }
         return instance;
     }

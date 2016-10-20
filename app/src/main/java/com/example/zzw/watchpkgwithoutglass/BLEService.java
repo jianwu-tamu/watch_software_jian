@@ -48,7 +48,7 @@ public class BLEService extends Service implements SensorEventListener{
     private int OFFSET_GYR = 10000;
     private int sensorStatus = STATUS_NONE;
     private byte[] lastData = null;
-    private int DELAY_20HZ = 50000;
+    private int DELAY_50HZ = 0;
     private static final int port = 4570;
 
     private String ip;
@@ -170,8 +170,8 @@ public class BLEService extends Service implements SensorEventListener{
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); // get SensorManager
         accSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); // get Accelerometer
         gyroSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE); // get Gyroscope
-        mSensorManager.registerListener(this, accSensor, DELAY_20HZ); // 20hz
-        mSensorManager.registerListener(this, gyroSensor, DELAY_20HZ); //20hz
+        mSensorManager.registerListener(this, accSensor, DELAY_50HZ); // 50hz
+        mSensorManager.registerListener(this, gyroSensor, DELAY_50HZ); //50hz
         new ReceiveThread().execute();
         return Service.START_STICKY;
     }

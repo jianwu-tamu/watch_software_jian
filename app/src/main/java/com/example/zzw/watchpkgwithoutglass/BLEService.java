@@ -184,6 +184,8 @@ public class BLEService extends Service implements SensorEventListener{
 
     @Override
     public void onDestroy() {
+        sock.close();
+        unregisterReceiver(stopInfoReceiver);
         unregisterReceiver(mBatInfoReceiver);
         mSensorManager.unregisterListener(this);
         wakeLock.release();
